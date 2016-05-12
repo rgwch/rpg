@@ -7,7 +7,7 @@ import org.junit.Test;
 /**
  * Created by gerry on 09.05.16.
  */
-public class test_rpg {
+public class rpgTest {
 
     @Test
     public void testName(){
@@ -35,5 +35,6 @@ public class test_rpg {
         String place=g.getRandomCity();
         String phone=g.getRandomPhoneNumber();
         System.out.println(vn+" "+ln+", "+bd+", "+street+", "+zip+" "+place+", "+phone);
+
     }
 }

@@ -1,12 +1,26 @@
 package ch.rgw.rpg;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class Generator {
 	private Namen names = new Namen();
 	private Lipsum lipsum = new Lipsum();
 	private Random rand=new Random();
+
+	public Map<String,String> generatePerson(){
+		Map<String,String> ret=new HashMap();
+		ret.put("firstname",getRandomFirstname());
+		ret.put("lastname",getRandomLastname());
+		ret.put("birthdate",getRandomBirthdate());
+		ret.put("street",getRandomStreet());
+		ret.put("zip",getRandomZip());
+		ret.put("place",getRandomCity());
+		ret.put("phone",getRandomPhoneNumber());
+		return ret;
+	}
 
 	public String getRandomFirstname(){
 		return names.getRandomVorname();
@@ -72,7 +86,7 @@ public class Generator {
 		String[] chopped=lipsum.getParagraph().split("[,\\.\\?\\!\\s]+");
 		int idx=new Random().nextInt(chopped.length);
 		String suffix=streets[rand.nextInt(streets.length)];
-		return chopped[idx]+suffix+" "+Integer.toString(rand.nextInt(137)+1);
+		return capitalize(chopped[idx]+suffix)+" "+Integer.toString(rand.nextInt(137)+1);
 	}
 	
 	public String getRandomZip(){
@@ -84,10 +98,18 @@ public class Generator {
 		String[] chopped=lipsum.getParagraph().split("[,\\.\\?\\!\\s]+");
 		int idx=new Random().nextInt(chopped.length);
 		String suffix=suffices[rand.nextInt(suffices.length)];
-		return chopped[idx]+suffix;
+		return capitalize(chopped[idx])+suffix;
 	}
 
 	public int getRandomNumber(int lower, int upper){
 		return rand.nextInt(upper-lower)+lower;
 	}
+
+	public String capitalize(String word) {
+		if (word == null || word.length() == 0) {
+			return "";
+		}
+		return word.substring(0, 1).toUpperCase() + word.substring(1);
+	}
+
 }
